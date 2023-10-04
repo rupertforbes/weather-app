@@ -1,0 +1,72 @@
+h1 {
+  text-align: center;
+}
+
+.row {
+  margin-bottom: 0px;
+}
+
+.interface {
+  display: block;
+  margin: 50px auto;
+  border: 1px #878787 solid;
+  border-radius: 5px;
+  padding: 20px;
+}
+
+.search:hover {
+  cursor: pointer;
+  opacity: 0.9;
+}
+
+.locator {
+  padding: 5px 5px;
+  color: #878787;
+  text-decoration: underline;
+}
+
+.locator:hover {
+  cursor: pointer;
+}
+
+.city {
+  color: #878787;
+  margin-top: 15px;
+}
+
+.temp {
+  font-size: 50px;
+}
+
+.icon {
+  text-align: center;
+  font-size: 120px;
+}
+
+.right {
+  margin-top: 30px;
+  line-height: 0.5;
+  font-weight: bold;
+  color: #878787;
+}
+
+.bottom {
+  text-align: center;
+  color: #878787;
+  line-height: 0.6;
+  margin-top: 50px;
+}
+
+.bottom-icon {
+  font-size: 40px;
+}
+
+.converter {
+  margin-left: 5px;
+  color: #878787;
+  text-decoration: underline;
+}
+
+.converter:hover {
+  cursor: pointer;
+}

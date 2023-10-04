@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles.css" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+      crossorigin="anonymous"
+    />
+    <script src="https://unpkg.com/axios@1.1.2/dist/axios.min.js"></script>
+    <title>Weather App</title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="row">
+        <h1>Weather App</h1>
+      </div>
+      <br />
+      <div class="row">
+        <div class="col-3"></div>
+        <div class="col-6 interface">
+          <div class="row">
+            <div class="input-group">
+              <form action="" class="input-group search-form">
+                <input
+                  type="text"
+                  class="form-control input"
+                  placeholder="Enter City..."
+                />
+                <span class="input-group-text search">Search</span>
+              </form>
+              <p class="locator">Use current location</p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <h2 class="city">London</h2>
+              <h2 class="temp">24°C</h2>
+              <p class="converter">Convert to °F</p>
+            </div>
+            <div class="col">
+              <h2 class="icon">🌤</h2>
+            </div>
+            <div class="col">
+              <div class="right">
+                <p class="date-and-time">Sunday 5:52 PM</p>
+                <p class="weather-type">Sun with Clouds</p>
+                <p class="humidity">Humidity: 79%</p>
+                <p class="wind">Wind: 4km/h</p>
+              </div>
+            </div>
+          </div>
+          <br />
+          <div class="row bottom-row">
+            <div class="col bottom">
+              <p>Mon</p>
+              <p><span class="bottom-icon">☁</span></p>
+              <p>22°C</p>
+            </div>
+            <div class="col bottom">
+              <p>Tue</p>
+              <p><span class="bottom-icon">☁</span></p>
+              <p>18°C</p>
+            </div>
+            <div class="col bottom">
+              <p>Wed</p>
+              <p><span class="bottom-icon">☀</span></p>
+              <p>18°C</p>
+            </div>
+            <div class="col bottom">
+              <p>Thu</p>
+              <p><span class="bottom-icon">🌧</span></p>
+              <p>18°C</p>
+            </div>
+            <div class="col bottom">
+              <p>Fri</p>
+              <p><span class="bottom-icon">☁</span></p>
+              <p>15°C</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-3"></div>
+      </div>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>
