@@ -12,21 +12,24 @@ h1 {
   border: 1px #878787 solid;
   border-radius: 5px;
   padding: 20px;
+  transition: 300ms ease-in-out all;
 }
 
 .search:hover {
   cursor: pointer;
-  opacity: 0.9;
+  opacity: 0.8;
 }
 
 .locator {
   padding: 5px 5px;
   color: #878787;
   text-decoration: underline;
+  transition: 300ms ease-in-out all;
 }
 
 .locator:hover {
   cursor: pointer;
+  opacity: 0.7;
 }
 
 .city {
@@ -65,8 +68,10 @@ h1 {
   margin-left: 5px;
   color: #878787;
   text-decoration: underline;
+  transition: 300ms ease-in-out all;
 }
 
 .converter:hover {
   cursor: pointer;
+  opacity: 0.7;
 }
