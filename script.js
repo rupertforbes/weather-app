@@ -56,6 +56,41 @@ function dateAndTime(dt) {
 
   let dateTime = document.querySelector(".date-and-time");
   dateTime.innerHTML = `${day} ${hour}:${minute} ${amPm}`;
+
+  //forcasts days
+
+  function dayConverter(newDay) {
+    if (newDay > 6) {
+      newDay = newDay - 7;
+    }
+    for (let i = 0; i < days.length; i++) {
+      if (days[i].number === newDay) {
+        return days[i].day;
+      }
+    }
+  }
+
+  let day1 = now.getDay() + 1;
+  day1 = dayConverter(day1);
+  let day2 = now.getDay() + 2;
+  day2 = dayConverter(day2);
+  let day3 = now.getDay() + 3;
+  day3 = dayConverter(day3);
+  let day4 = now.getDay() + 4;
+  day4 = dayConverter(day4);
+  let day5 = now.getDay() + 5;
+  day5 = dayConverter(day5);
+
+  let forecast1Day = document.querySelector(".forecast1-day");
+  forecast1Day.innerHTML = day1;
+  let forecast2Day = document.querySelector(".forecast2-day");
+  forecast2Day.innerHTML = day2;
+  let forecast3Day = document.querySelector(".forecast3-day");
+  forecast3Day.innerHTML = day3;
+  let forecast4Day = document.querySelector(".forecast4-day");
+  forecast4Day.innerHTML = day4;
+  let forecast5Day = document.querySelector(".forecast5-day");
+  forecast5Day.innerHTML = day5;
 }
 
 //Search bar
@@ -152,7 +187,6 @@ function showUser(response) {
 
   //date and time
   let dt = response.data.dt * 1000;
-  console.log(dt);
   dateAndTime(dt);
 }
 
@@ -171,7 +205,7 @@ function newCityFunction(event) {
   let apiKey = "1fd8093fa5ff12d796d7de756cc9d6b9";
   let url = "https://api.openweathermap.org/data/2.5/weather?q=";
   let newCity = searchBar.value;
-  let apiUrl = url + newCity + "&units=metric&appid=" + apiKey;
+  let apiUrl = `${url}${newCity}&units=metric&appid=${apiKey}`;
   axios.get(apiUrl).then(showUser);
 }
 
@@ -232,3 +266,7 @@ let convertButton = document.querySelector(".converter");
 let isCelsius = true;
 
 convertButton.addEventListener("click", conversion);
+
+// Forecast
+
+// api.openweathermap.org/data/2.5/forecast/daily?q=london&appid=1fd8093fa5ff12d796d7de756cc9d6b9
