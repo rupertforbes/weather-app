@@ -48,6 +48,11 @@ h1 {
   font-size: 120px;
 }
 
+.max-temp {
+  font-weight: bold;
+  color: black;
+}
+
 .left {
   padding-left: 20px;
 }

@@ -1,39 +1,49 @@
+function dayConverter(newDay) {
+  if (newDay > 6) {
+    newDay = newDay - 7;
+  }
+  for (let i = 0; i < days.length; i++) {
+    if (days[i].number === newDay) {
+      return days[i].day;
+    }
+  }
+}
+
 //Date and time
 
-function dateAndTime(dt) {
-  let days = [
-    {
-      number: 0,
-      day: "Sun",
-    },
-    {
-      number: 1,
-      day: "Mon",
-    },
-    {
-      number: 2,
-      day: "Tue",
-    },
-    {
-      number: 3,
-      day: "Wed",
-    },
-    {
-      number: 4,
-      day: "Thu",
-    },
-    {
-      number: 5,
-      day: "Fri",
-    },
-    {
-      number: 6,
-      day: "Sat",
-    },
-  ];
+let days = [
+  {
+    number: 0,
+    day: "Sun",
+  },
+  {
+    number: 1,
+    day: "Mon",
+  },
+  {
+    number: 2,
+    day: "Tue",
+  },
+  {
+    number: 3,
+    day: "Wed",
+  },
+  {
+    number: 4,
+    day: "Thu",
+  },
+  {
+    number: 5,
+    day: "Fri",
+  },
+  {
+    number: 6,
+    day: "Sat",
+  },
+];
 
+function dateAndTime(dt) {
   let now = new Date(dt);
-  console.log(now);
   let day = now.getDay();
   let hour = now.getHours();
   let minute = now.getMinutes();
@@ -59,17 +69,7 @@ function dateAndTime(dt) {
 
   //forcasts days
 
-  function dayConverter(newDay) {
-    if (newDay > 6) {
-      newDay = newDay - 7;
-    }
-    for (let i = 0; i < days.length; i++) {
-      if (days[i].number === newDay) {
-        return days[i].day;
-      }
-    }
-  }
-
+  /*
   let day1 = now.getDay() + 1;
   day1 = dayConverter(day1);
   let day2 = now.getDay() + 2;
@@ -90,10 +90,77 @@ function dateAndTime(dt) {
   let forecast4Day = document.querySelector(".forecast4-day");
   forecast4Day.innerHTML = day4;
   let forecast5Day = document.querySelector(".forecast5-day");
-  forecast5Day.innerHTML = day5;
+  forecast5Day.innerHTML = day5;*/
 }
 
-//Search bar
+//Updating forecast
+
+function displayForecast(response) {
+  let dt = response.data.daily[0].time * 1000;
+  let date = new Date(dt);
+  let forecastElement = document.querySelector("#forecast");
+  let forecastHTML = `<div class="row bottom-row">`;
+
+  for (let i = 0; i < 5; i++) {
+    let day = date.getDay() + 1 + i;
+    if (day > 6) {
+      day = day - 7;
+    }
+    day = days[day].day;
+
+    let weatherType = response.data.daily[1 + i].condition.icon;
+    let icon;
+    if (weatherType === "clear-sky-day") {
+      icon = "☀";
+    } else if (
+      weatherType === "few-clouds-day" ||
+      weatherType === "scattered-clouds-day"
+    ) {
+      icon = "⛅";
+    } else if (weatherType === "broken-clouds-day") {
+      icon = "☁";
+    } else if (weatherType === "shower-rain-day") {
+      icon = "🌦";
+    } else if (weatherType === "rain-day") {
+      icon = "🌧";
+    } else if (weatherType === "thunderstorm-day") {
+      icon = "⛈";
+    } else if (weatherType === "snow-day") {
+      icon = "🌨";
+    } else if (weatherType === "mist-day") {
+      icon = "🌫";
+    }
+
+    console.log(icon);
+
+    let maxTemp = Math.round(response.data.daily[1 + i].temperature.maximum);
+    let minTemp = Math.round(response.data.daily[1 + i].temperature.minimum);
+
+    forecastHTML =
+      forecastHTML +
+      `
+        <div class="col bottom">
+            <p class="forecast1-day">${day}</p>
+            <p><span class="bottom-icon">${icon}</span></p>
+            <p><span class="max-temp">${maxTemp}°</span><span class="min-temp"> ${minTemp}°</span></p>
+        </div>
+    `;
+  }
+  forecastHTML = forecastHTML + `</div>`;
+
+  forecastElement.innerHTML = forecastHTML;
+  console.log(response);
+}
+
+function getForecast(coordinates) {
+  let longitude = coordinates.lon;
+  let latitude = coordinates.lat;
+  let apiKey = "b5a70e3dbaf3379o5576fffe161ca0t4";
+  let apiURL = `https://api.shecodes.io/weather/v1/forecast?lon=${longitude}&lat=${latitude}&key=${apiKey}&units=metric`;
+  axios.get(apiURL).then(displayForecast);
+}
+
+//Updating weather data
 
 let icons = [
   {
@@ -126,8 +193,6 @@ let icons = [
 ];
 
 function showUser(response) {
-  console.log(response);
-
   //city
   let changedCity = document.querySelector(".city");
   changedCity.innerHTML = `${response.data.name}`;
@@ -188,6 +253,9 @@ function showUser(response) {
   //date and time
   let dt = response.data.dt * 1000;
   dateAndTime(dt);
+
+  //call forecast function
+  getForecast(response.data.coord);
 }
 
 function startingCityFunction(event) {
@@ -266,7 +334,3 @@ let convertButton = document.querySelector(".converter");
 let isCelsius = true;
 
 convertButton.addEventListener("click", conversion);
-
-// Forecast
-
-// api.openweathermap.org/data/2.5/forecast/daily?q=london&appid=1fd8093fa5ff12d796d7de756cc9d6b9
