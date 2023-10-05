@@ -1,99 +1,5 @@
 //Search bar
 
-/*let cities = [
-  {
-    city: "Berlin",
-    temperature: 15,
-    unit: { celsius: "°C", fahrenheit: "°F" },
-    humidity: "70%",
-  },
-  {
-    city: "London",
-    temperature: 24,
-    unit: { celsius: "°C", fahrenheit: "°F" },
-    humidity: "75%",
-  },
-  {
-    city: "Paris",
-    temperature: 26,
-    unit: { celsius: "°C", fahrenheit: "°F" },
-    humidity: "80%",
-  },
-  {
-    city: "Madrid",
-    temperature: 30,
-    unit: { celsius: "°C", fahrenheit: "°F" },
-    humidity: "90%",
-  },
-  {
-    city: "Rome",
-    temperature: 28,
-    unit: { celsius: "°C", fahrenheit: "°F" },
-    humidity: "85%",
-  },
-  {
-    city: "Lisbon",
-    temperature: 27,
-    unit: { celsius: "°C", fahrenheit: "°F" },
-    humidity: "75%",
-  },
-  {
-    city: "New York",
-    temperature: 19,
-    unit: { celsius: "°C", fahrenheit: "°F" },
-    humidity: "65%",
-  },
-  {
-    city: "Sydney",
-    temperature: 18,
-    unit: { celsius: "°C", fahrenheit: "°F" },
-    humidity: "70%",
-  },
-  {
-    city: "Los Angeles",
-    temperature: 25,
-    unit: { celsius: "°C", fahrenheit: "°F" },
-    humidity: "80%",
-  },
-  {
-    city: "Cape Town",
-    temperature: 15,
-    unit: { celsius: "°C", fahrenheit: "°F" },
-    humidity: "70%",
-  },
-  {
-    city: "Delhi",
-    temperature: 15,
-    unit: { celsius: "°C", fahrenheit: "°F" },
-    humidity: "90%",
-  },
-];
-
-function newCityFunction(event) {
-  event.preventDefault();
-  let newCity = searchBar.value;
-  let lowerCity = newCity.toLowerCase();
-  let cityElement = document.querySelector(".city");
-  let message =
-    "Sorry, we don't know the weather for this city, try going to https://www.google.com/search?q=weather+" +
-    newCity;
-  let updatedCity = cityElement.innerHTML;
-  for (let i = 0; i < cities.length; i++) {
-    if (lowerCity === cities[i].city.toLowerCase()) {
-      let tempF = cities[i].temperature * 1.8 + 32;
-      tempF = Math.round(tempF);
-      message = `It is currently ${cities[i].temperature}${cities[i].unit.celsius} (${tempF}${cities[i].unit.fahrenheit}) with a humidity of ${cities[i].humidity} in ${cities[i].city}.`;
-      updatedCity = cities[i].city;
-      console.log(updatedCity);
-    }
-  }
-  cityElement.innerHTML = updatedCity;
-  alert(message);
-}
-*/
-
-//Search bar
-
 let icons = [
   {
     type: "Thunderstorm",
@@ -185,6 +91,16 @@ function showUser(response) {
   windSpeedElement.innerHTML = `Wind: ${newWindSpeed}km/h`;
 }
 
+function startingCityFunction(event) {
+  let apiKey = "1fd8093fa5ff12d796d7de756cc9d6b9";
+  let url = "https://api.openweathermap.org/data/2.5/weather?q=";
+  let startingCity = "London";
+  let apiUrl = url + startingCity + "&units=metric&appid=" + apiKey;
+  axios.get(apiUrl).then(showUser);
+}
+
+startingCityFunction();
+
 function newCityFunction(event) {
   event.preventDefault();
   let apiKey = "1fd8093fa5ff12d796d7de756cc9d6b9";
@@ -192,8 +108,6 @@ function newCityFunction(event) {
   let newCity = searchBar.value;
   let apiUrl = url + newCity + "&units=metric&appid=" + apiKey;
   axios.get(apiUrl).then(showUser);
-
-  //let cityElement = document.querySelector(".city");
 }
 
 function handlePosition(position) {
