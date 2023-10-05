@@ -1,3 +1,63 @@
+//Date and time
+
+function dateAndTime(dt) {
+  let days = [
+    {
+      number: 0,
+      day: "Sun",
+    },
+    {
+      number: 1,
+      day: "Mon",
+    },
+    {
+      number: 2,
+      day: "Tue",
+    },
+    {
+      number: 3,
+      day: "Wed",
+    },
+    {
+      number: 4,
+      day: "Thu",
+    },
+    {
+      number: 5,
+      day: "Fri",
+    },
+    {
+      number: 6,
+      day: "Sat",
+    },
+  ];
+
+  let now = new Date(dt);
+  console.log(now);
+  let day = now.getDay();
+  let hour = now.getHours();
+  let minute = now.getMinutes();
+  if (minute < 10) {
+    minute = "0" + minute;
+  }
+  let amPm = "PM";
+
+  for (let i = 0; i < days.length; i++) {
+    if (days[i].number === day) {
+      day = days[i].day;
+    }
+  }
+
+  if (hour > 12) {
+    hour = hour - 12;
+  } else {
+    amPm = "AM";
+  }
+
+  let dateTime = document.querySelector(".date-and-time");
+  dateTime.innerHTML = `${day} ${hour}:${minute} ${amPm}`;
+}
+
 //Search bar
 
 let icons = [
@@ -89,6 +149,11 @@ function showUser(response) {
   let windSpeedElement = document.querySelector(".wind");
   let newWindSpeed = Math.round(response.data.wind.speed * 10) / 10;
   windSpeedElement.innerHTML = `Wind: ${newWindSpeed}km/h`;
+
+  //date and time
+  let dt = response.data.dt * 1000;
+  console.log(dt);
+  dateAndTime(dt);
 }
 
 function startingCityFunction(event) {
@@ -131,60 +196,6 @@ let currentLocation = document.querySelector(".locator");
 currentLocation.addEventListener("click", newCityByLocation);
 searchForm.addEventListener("submit", newCityFunction);
 searchButton.addEventListener("click", newCityFunction);
-
-//Date and time
-
-let days = [
-  {
-    number: 0,
-    day: "Sun",
-  },
-  {
-    number: 1,
-    day: "Mon",
-  },
-  {
-    number: 2,
-    day: "Tue",
-  },
-  {
-    number: 3,
-    day: "Wed",
-  },
-  {
-    number: 4,
-    day: "Thu",
-  },
-  {
-    number: 5,
-    day: "Fri",
-  },
-  {
-    number: 6,
-    day: "Sat",
-  },
-];
-
-let now = new Date();
-let day = now.getDay();
-let hour = now.getHours();
-let minute = now.getMinutes();
-let amPm = "PM";
-
-for (let i = 0; i < days.length; i++) {
-  if (days[i].number === day) {
-    day = days[i].day;
-  }
-}
-
-if (hour > 12) {
-  hour = hour - 12;
-} else {
-  amPm = "AM";
-}
-
-let dateTime = document.querySelector(".date-and-time");
-dateTime.innerHTML = `${day} ${hour}:${minute} ${amPm}`;
 
 // C to F Converter
 
