@@ -66,31 +66,6 @@ function dateAndTime(dt) {
 
   let dateTime = document.querySelector(".date-and-time");
   dateTime.innerHTML = `${day} ${hour}:${minute} ${amPm}`;
-
-  //forcasts days
-
-  /*
-  let day1 = now.getDay() + 1;
-  day1 = dayConverter(day1);
-  let day2 = now.getDay() + 2;
-  day2 = dayConverter(day2);
-  let day3 = now.getDay() + 3;
-  day3 = dayConverter(day3);
-  let day4 = now.getDay() + 4;
-  day4 = dayConverter(day4);
-  let day5 = now.getDay() + 5;
-  day5 = dayConverter(day5);
-
-  let forecast1Day = document.querySelector(".forecast1-day");
-  forecast1Day.innerHTML = day1;
-  let forecast2Day = document.querySelector(".forecast2-day");
-  forecast2Day.innerHTML = day2;
-  let forecast3Day = document.querySelector(".forecast3-day");
-  forecast3Day.innerHTML = day3;
-  let forecast4Day = document.querySelector(".forecast4-day");
-  forecast4Day.innerHTML = day4;
-  let forecast5Day = document.querySelector(".forecast5-day");
-  forecast5Day.innerHTML = day5;*/
 }
 
 //Updating forecast
@@ -131,8 +106,6 @@ function displayForecast(response) {
       icon = "🌫";
     }
 
-    console.log(icon);
-
     let maxTemp = Math.round(response.data.daily[1 + i].temperature.maximum);
     let minTemp = Math.round(response.data.daily[1 + i].temperature.minimum);
 
@@ -149,7 +122,6 @@ function displayForecast(response) {
   forecastHTML = forecastHTML + `</div>`;
 
   forecastElement.innerHTML = forecastHTML;
-  console.log(response);
 }
 
 function getForecast(coordinates) {
