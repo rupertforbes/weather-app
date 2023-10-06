@@ -88,3 +88,7 @@ h1 {
   cursor: pointer;
   opacity: 0.7;
 }
+
+.github-link {
+  padding-left: 50px;
+}
