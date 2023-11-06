@@ -92,3 +92,9 @@ h1 {
 .github-link {
   padding-left: 50px;
 }
+
+@media (max-width: 800px) {
+  .github-link {
+    padding-left: 15px;
+  }
+}
